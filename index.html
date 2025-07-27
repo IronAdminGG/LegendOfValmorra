@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Background with Fading Buttons</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: black;
+    }
+
+    .bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('bg.jpg');
+      background-size: 100% 100%;
+      background-position: center center;
+      opacity: 0;
+      animation: fadeInBg 3s ease forwards;
+    }
+
+    @keyframes fadeInBg {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .center-wrapper {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeInButtons 1.5s ease 1s forwards; /* Start after bg fade */
+    }
+
+    @keyframes fadeInButtons {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .Btn {
+          top: 75px;  /* 👈 Lower than middle */
+
+      width: 200px;
+      height: 75px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
+      background-size: 250%;
+      background-position: left;
+      color: #ffd277;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition-duration: 1s;
+      overflow: hidden;
+    }
+
+    .Btn::before {
+      position: absolute;
+      content: attr(data-label);
+      color: #ffd277;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 97%;
+      height: 90%;
+
+      border-radius: 8px;
+      transition-duration: 1s;
+      background-color: rgba(0, 0, 0, 0.842);
+      background-size: 200%;
+    }
+
+    .Btn:hover {
+      background-position: right;
+      transition-duration: 1s;
+    }
+
+    .Btn:hover::before {
+      background-position: right;
+    }
+
+    .Btn:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+
+  <div class="center-wrapper">
+<button class="Btn" data-label="Play" style="font-size: 34px;"></button>
+    <button class="Btn" data-label="Privacy Policy" style="font-size: 24px;"></button>
+  </div>
+</body>
+</html>
